@@ -16,8 +16,8 @@ class ArticlesService:
     def load_articles(self, depth=1, max_per_url=3):
         return self._crawler.read_articles(self._config['sources'], self._content_consumer, depth, max_per_url)
 
-    def search(self, query):
-        return self._repository.search(query)
+    def search(self, query, max_results=1):
+        return self._repository.search(query, max_results)
 
     def _content_consumer(self, data):
         print(f'Title: {data['title']}')

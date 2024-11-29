@@ -5,10 +5,12 @@ from urllib.parse import urljoin
 
 class WebCrawler:
 
-    # todo 1-level only as simplification and data volume limitation
-    def read_articles(self, urls: list[str], content_consumer, depth=1, max_results_per_url=100):
+    def read_articles(self, urls: list[str], content_consumer, depth=1, max_results_per_url=100) -> int:
+        total = 0
         for url in urls:
-            self._process_url(url, content_consumer, depth, max_results_per_url)
+            processed = self._process_url(url, content_consumer, depth, max_results_per_url)
+            total = total + processed
+        return total
 
     def _process_url(self, url: str, content_consumer, max_depth, max_results):
 
@@ -20,7 +22,7 @@ class WebCrawler:
             if self._is_a_news_link(link) and processed < max_results:
                 #  for now, we process at the time of traversing,
                 #  but it can be done separately, and in multiple threads
-                article = self._proccess_article_link(link, content_consumer)
+                article = self._proccess_article_link(link)
                 if article:
                     content_consumer(article)
                     processed = processed + 1
@@ -35,11 +37,13 @@ class WebCrawler:
                     full_link = urljoin(url, new_link['href'])
                     queue.append((full_link, new_depth))
 
+        return processed
+
     # for now, it will probably work with bbc news, but you may somehow customize it using inheritance or config file
     def _is_a_news_link(self, link):
         return 'article' in link
 
-    def _proccess_article_link(self, link, content_consumer):
+    def _proccess_article_link(self, link):
         subpage_html = requests.get(link).text
         page = BeautifulSoup(subpage_html, 'lxml')
 

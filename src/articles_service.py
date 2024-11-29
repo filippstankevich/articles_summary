@@ -13,8 +13,8 @@ class ArticlesService:
         self._repository = ArticlesRepository(self._config['chromadb'])
         self._crawler = WebCrawler()
 
-    def load_articles(self, depth=1, max_results_per_url=3):
-        self._crawler.read_articles(self._config['sources'], self._content_consumer, depth, max_results_per_url)
+    def load_articles(self, depth=1, max_per_url=3):
+        return self._crawler.read_articles(self._config['sources'], self._content_consumer, depth, max_per_url)
 
     def search(self, query):
         return self._repository.search(query)

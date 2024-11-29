@@ -1,20 +1,19 @@
 import uuid
-
 import chromadb
-from chromadb.utils import embedding_functions
-
+from chromadb.utils.embedding_functions import openai_embedding_function
 from search_result import SearchResult
-
 
 class ArticlesRepository:
 
-    def __init__(self, path):
+    def __init__(self, path, embedding_model, api_key):
         self._client = chromadb.PersistentClient(path=path)
 
         self._collection = self._client.get_or_create_collection(
             'articles',
-            # todo is there a better embedding model? openai?
-            embedding_function=embedding_functions.DefaultEmbeddingFunction())
+            embedding_function=openai_embedding_function.OpenAIEmbeddingFunction(
+                api_key=api_key,
+                model_name=embedding_model
+            ))
 
     def save(self, title, content, summary):
         # todo should we store content in different connection?

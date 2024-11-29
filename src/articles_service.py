@@ -1,3 +1,4 @@
+
 class ArticlesService:
     def __init__(self, summary_extractor, articles_repository, web_crawler, sources):
         self._summary_extractor = summary_extractor

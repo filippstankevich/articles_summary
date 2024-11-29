@@ -9,14 +9,14 @@ class ArticlesController:
 
     def _load_articles(self):
         depth = request.args.get('depth', default=1)
-        max_results_per_url: int = request.args.get('max', default=3)
+        max_results_per_url = int(request.args.get('max', default=10))
         total = self._articles_service.load_articles(depth, max_results_per_url)
-        return { 'message' : f'Successfully loaded {total} articles' }
+        return {'message': f'Successfully loaded {total} articles'}
 
     def _search(self):
         query = request.args.get('query')
         if not query:
-            return { 'error' : "No 'query' parameter provided" }
-        max_results: int = request.args.get('max', default=3)
+            return {'error': "No 'query' parameter provided"}
+        max_results = int(request.args.get('max', default=3))
         results = self._articles_service.search(query, max_results)
-        return { 'results': [ result.__dict__ for result in results ] }
+        return {'results': [result.__dict__ for result in results]}

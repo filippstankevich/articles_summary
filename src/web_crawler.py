@@ -2,9 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
-
 class WebCrawler:
-
     def read_articles(self, urls: list[str], content_consumer, depth=1, max_results_per_url=100) -> int:
         total = 0
         for url in urls:

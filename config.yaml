@@ -1,3 +1,5 @@
+app:
+  port: 5000
 sources:
   - https://www.bbc.com/news
 openai:
@@ -5,3 +7,4 @@ openai:
   model: gpt-3.5-turbo
 chromadb:
   path: ../articles_db
+  embedding_model: text-embedding-3-large

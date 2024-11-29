@@ -13,11 +13,12 @@ if __name__ == '__main__':
 
     openai_config = config['openai']
     summary_extractor = SummaryExtractor(openai_config['api-key'], openai_config['model'])
-    articles_repository = ArticlesRepository(config['chromadb']['path'])
+    chromadb_config = config['chromadb']
+    articles_repository = ArticlesRepository(chromadb_config['path'], chromadb_config['embedding_model'], openai_config['api-key'])
     web_crawler = WebCrawler()
 
     web_app = Flask(__name__)
     articles_service = ArticlesService(summary_extractor, articles_repository, web_crawler, config['sources'])
     articles_controller = ArticlesController(articles_service, web_app)
 
-    web_app.run()
+    web_app.run(port=config['app']['port'])

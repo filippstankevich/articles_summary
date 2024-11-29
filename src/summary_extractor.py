@@ -1,6 +1,5 @@
 from openai import OpenAI
 
-
 class SummaryExtractor:
 
     def __init__(self, api_key, model):

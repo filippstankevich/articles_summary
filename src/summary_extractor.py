@@ -3,8 +3,9 @@ from openai import OpenAI
 
 class SummaryExtractor:
 
-    def __init__(self, config):
-        self._config = config
+    def __init__(self, api_key, model):
+        self._api_key = api_key
+        self._model = model
 
     def extract_summary(self, content):
         # todo we should chunk large content before sending to open ai
@@ -14,10 +15,10 @@ class SummaryExtractor:
             {"role": "user", "content": content}
         ]
 
-        client = OpenAI(api_key=self._config['api-key'])
+        client = OpenAI(api_key=self._api_key)
 
         response = client.chat.completions.create(
-            model=self._config['model'],
+            model=self._model,
             messages=messages,
             temperature=0
         )

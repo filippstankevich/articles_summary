@@ -8,8 +8,8 @@ from search_result import SearchResult
 
 class ArticlesRepository:
 
-    def __init__(self, config):
-        self._client = chromadb.PersistentClient(path=config['path'])
+    def __init__(self, path):
+        self._client = chromadb.PersistentClient(path=path)
 
         self._collection = self._client.get_or_create_collection(
             'articles',

@@ -17,8 +17,6 @@ It works per url to be crawled
 
 - All REST API intentionally use GET methods for your convenience if you don't have Postman or other tools installed
 
-- *Limitation*: you have to encode spaces (if any) with %20 in your search phrase
-
 - The application written using Python 3.13
 
 ### Further improvements

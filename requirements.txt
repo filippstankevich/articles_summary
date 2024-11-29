@@ -1,0 +1,8 @@
+openai~=1.55.2
+chromadb~=0.5.20
+bs4~=0.0.2
+lxml
+
+PyYAML~=6.0.2
+requests~=2.32.3
+beautifulsoup4~=4.12.3

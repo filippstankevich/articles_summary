@@ -6,3 +6,4 @@ lxml
 PyYAML~=6.0.2
 requests~=2.32.3
 beautifulsoup4~=4.12.3
+Flask~=3.1.0

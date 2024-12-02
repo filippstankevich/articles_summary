@@ -1,6 +1,8 @@
+from urllib.parse import urljoin
+
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
+
 
 class WebCrawler:
     def read_articles(self, urls: list[str], content_consumer, depth=1, max_results_per_url=100) -> int:
@@ -23,7 +25,8 @@ class WebCrawler:
                 article = self._proccess_article_link(link)
                 if article:
                     content_consumer(article)
-                    processed = processed + 1
+                    processed += 1
+                    print(f'Articles processed: {processed}')
 
             if depth < max_depth and processed < max_results:
                 html = requests.get(url).text

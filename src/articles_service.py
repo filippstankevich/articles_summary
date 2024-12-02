@@ -1,4 +1,5 @@
 
+
 class ArticlesService:
     def __init__(self, summary_extractor, articles_repository, web_crawler, sources):
         self._summary_extractor = summary_extractor
@@ -14,7 +15,6 @@ class ArticlesService:
 
     def _content_consumer(self, data):
         print(f'Title: {data['title']}')
-        print(f'Content: {data['content']}')
         summary = self._summary_extractor.extract_summary(data['content'])
         print(f'Summary: {summary}')
         self._articles_repository.save(data['title'], data['content'], summary)

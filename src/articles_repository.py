@@ -1,7 +1,10 @@
 import uuid
+
 import chromadb
 from chromadb.utils.embedding_functions import openai_embedding_function
+
 from search_result import SearchResult
+
 
 class ArticlesRepository:
 
@@ -17,7 +20,8 @@ class ArticlesRepository:
 
     def save(self, title, content, summary):
         # todo should we store content in different connection?
-        self._collection.add(documents=[self._encode_document(title, summary)], ids=[str(uuid.uuid4())], metadatas={'title': title, 'content': content})
+        self._collection.add(documents=[self._encode_document(title, summary)], ids=[str(uuid.uuid4())],
+                             metadatas={'title': title, 'content': content})
 
     def search(self, phrase, max_results) -> list[SearchResult]:
         query_result = self._collection.query(query_texts=[phrase], n_results=max_results)
@@ -28,7 +32,8 @@ class ArticlesRepository:
             document = query_result['documents'][0][i]
             metadata = query_result['metadatas'][0][i]
             distance = query_result['distances'][0][i]
-            search_result = SearchResult(metadata['title'], metadata['content'], self._extract_summary(document), distance)
+            search_result = SearchResult(metadata['title'], metadata['content'], self._extract_summary(document),
+                                         distance)
             search_results.append(search_result)
 
         return search_results
@@ -42,5 +47,3 @@ class ArticlesRepository:
             return document
 
         return document[document.index('\n') + 1:len(document)]
-
-

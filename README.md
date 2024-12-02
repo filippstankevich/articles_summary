@@ -13,7 +13,7 @@
 - */load* by default loads first 20 articles, you may tune it by passing param ```max=<desired value>```.
 It works per url to be crawled
 
-- */search* by default returns top 3 results, you may tune it by passing ```max=<desired value>```.
+- */search* by default returns top 1 result, you may tune it by passing ```max=<desired value>```.
 
 - All REST API intentionally use GET methods for your convenience if you don't have Postman or other tools installed
 
@@ -21,7 +21,12 @@ It works per url to be crawled
 
 - The application written using Python 3.13
 
+### Limitations
+
+Since there was no goal of production ready app, this application was tested on 'BBC news' source only.
+Each news website might have own specific markup. The web crawler needs a further tuning for other sources.
+
 ### Further improvements
 
-- Concurrent web crawler
-- Strict typing and data classes for configuration
+- Support of different sources
+- Concurrent web crawling

@@ -1,6 +1,6 @@
-# Articles summariser
+## Articles summariser
 
-## How to use
+### How to use
 
 1. Install required dependencies specified in *requirements.txt*
 2. Put your OpenAI API key in *config.yaml*
